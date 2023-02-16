@@ -10,9 +10,18 @@ cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
-})
+});
 
-const getAllProperties = async (req, res) => {};
+const getAllProperties = async (req, res) => {
+    try {
+        // Find all the properties in the db
+        const properties = await Property.find({}).limit(req.query._end);
+
+        res.status(200).json(properties);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
 const getPropertyDetail = async (req, res) => {};
 
