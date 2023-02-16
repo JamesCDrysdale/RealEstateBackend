@@ -31,4 +31,6 @@ MIT
 - Route = Endpoint
 - Controller = Logic for each route
 
+### Sessions and atomicity
 
+Using Mongoose to create a new session when creating a new property makes the operation an atomic transaction. This means it either succeeds, or fails. The main benefit is that it prevents updates to the database happening only partially.
