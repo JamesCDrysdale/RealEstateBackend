@@ -1,7 +1,7 @@
 import express from 'express';
 
 // Controller Import
-import { createUser, getAllUsers, getUserInfoByID } from '../controllers/user.controller';
+import { createUser, getAllUsers, getUserInfoByID } from '../controllers/user.controller.js';
 
 // Initialise Instance of a router
 const router = express.Router();
