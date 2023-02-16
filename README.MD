@@ -23,3 +23,12 @@ The backend uses the following technologies:
 
 MIT
 
+## Notes
+
+### Data Flow
+
+- Http Request => Routes => Controllers => Models => Database
+- Route = Endpoint
+- Controller = Logic for each route
+
+
