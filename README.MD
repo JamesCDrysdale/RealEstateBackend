@@ -5,7 +5,7 @@
 ### Running the server.
 
 ```bash
-    nodemon index
+    npm start
 ```
 
 ## Learn More
