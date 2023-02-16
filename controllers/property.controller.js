@@ -13,9 +13,32 @@ cloudinary.config({
 });
 
 const getAllProperties = async (req, res) => {
+    // Get all properties based on filtering, sorting and pagination
+    const { _end, _order, _start, _sort, title_like = "", propertyType = "" } = req.query;
+
+    const query = {};
+
+    // Only query if we have something passed in
+    if (propertyType !== "") {
+        query.propertyType = propertyType;
+    }
+
+    // Options i means case insensitive
+    if (title_like) {
+        query.title = { $regex: title_like, $options: 'i'};
+    }
+
     try {
+        const count = await Property.countDocuments({ query });
+
         // Find all the properties in the db
-        const properties = await Property.find({}).limit(req.query._end);
+        const properties = await Property
+            .find(query)
+            .limit(_end)
+            .skip(_start)
+            .sort({ [_sort]: _order })
+        res.header('x-total-count', count);
+        res.header('Access-Control-Expose-Headers', 'x-total-count');
 
         res.status(200).json(properties);
     } catch (error) {
